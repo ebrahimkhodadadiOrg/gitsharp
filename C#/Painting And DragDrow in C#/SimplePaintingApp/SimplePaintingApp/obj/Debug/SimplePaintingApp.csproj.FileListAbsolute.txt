@@ -1,0 +1,9 @@
+C:\Users\Ariyan\Desktop\SimplePaintingApp\SimplePaintingApp\bin\Debug\SimplePaintingApp.exe.config
+C:\Users\Ariyan\Desktop\SimplePaintingApp\SimplePaintingApp\bin\Debug\SimplePaintingApp.exe
+C:\Users\Ariyan\Desktop\SimplePaintingApp\SimplePaintingApp\bin\Debug\SimplePaintingApp.pdb
+C:\Users\Ariyan\Desktop\SimplePaintingApp\SimplePaintingApp\obj\Debug\SimplePaintingApp.csprojResolveAssemblyReference.cache
+C:\Users\Ariyan\Desktop\SimplePaintingApp\SimplePaintingApp\obj\Debug\SimplePaintingApp.Form1.resources
+C:\Users\Ariyan\Desktop\SimplePaintingApp\SimplePaintingApp\obj\Debug\SimplePaintingApp.Properties.Resources.resources
+C:\Users\Ariyan\Desktop\SimplePaintingApp\SimplePaintingApp\obj\Debug\SimplePaintingApp.csproj.GenerateResource.Cache
+C:\Users\Ariyan\Desktop\SimplePaintingApp\SimplePaintingApp\obj\Debug\SimplePaintingApp.exe
+C:\Users\Ariyan\Desktop\SimplePaintingApp\SimplePaintingApp\obj\Debug\SimplePaintingApp.pdb

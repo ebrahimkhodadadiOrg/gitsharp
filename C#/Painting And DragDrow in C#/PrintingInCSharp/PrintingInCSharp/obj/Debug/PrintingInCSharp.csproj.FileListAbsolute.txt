@@ -1,0 +1,9 @@
+C:\Users\Ariyan\Desktop\PrintingInCSharp\PrintingInCSharp\bin\Debug\PrintingInCSharp.exe.config
+C:\Users\Ariyan\Desktop\PrintingInCSharp\PrintingInCSharp\bin\Debug\PrintingInCSharp.exe
+C:\Users\Ariyan\Desktop\PrintingInCSharp\PrintingInCSharp\bin\Debug\PrintingInCSharp.pdb
+C:\Users\Ariyan\Desktop\PrintingInCSharp\PrintingInCSharp\obj\Debug\PrintingInCSharp.csprojResolveAssemblyReference.cache
+C:\Users\Ariyan\Desktop\PrintingInCSharp\PrintingInCSharp\obj\Debug\PrintingInCSharp.Form1.resources
+C:\Users\Ariyan\Desktop\PrintingInCSharp\PrintingInCSharp\obj\Debug\PrintingInCSharp.Properties.Resources.resources
+C:\Users\Ariyan\Desktop\PrintingInCSharp\PrintingInCSharp\obj\Debug\PrintingInCSharp.csproj.GenerateResource.Cache
+C:\Users\Ariyan\Desktop\PrintingInCSharp\PrintingInCSharp\obj\Debug\PrintingInCSharp.exe
+C:\Users\Ariyan\Desktop\PrintingInCSharp\PrintingInCSharp\obj\Debug\PrintingInCSharp.pdb

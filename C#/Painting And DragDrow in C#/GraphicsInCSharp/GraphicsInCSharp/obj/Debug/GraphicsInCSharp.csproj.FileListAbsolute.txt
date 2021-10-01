@@ -1,0 +1,9 @@
+C:\Users\Ariyan\Desktop\GraphicsInCSharp\GraphicsInCSharp\bin\Debug\GraphicsInCSharp.exe.config
+C:\Users\Ariyan\Desktop\GraphicsInCSharp\GraphicsInCSharp\bin\Debug\GraphicsInCSharp.exe
+C:\Users\Ariyan\Desktop\GraphicsInCSharp\GraphicsInCSharp\bin\Debug\GraphicsInCSharp.pdb
+C:\Users\Ariyan\Desktop\GraphicsInCSharp\GraphicsInCSharp\obj\Debug\GraphicsInCSharp.csprojResolveAssemblyReference.cache
+C:\Users\Ariyan\Desktop\GraphicsInCSharp\GraphicsInCSharp\obj\Debug\GraphicsInCSharp.Form1.resources
+C:\Users\Ariyan\Desktop\GraphicsInCSharp\GraphicsInCSharp\obj\Debug\GraphicsInCSharp.Properties.Resources.resources
+C:\Users\Ariyan\Desktop\GraphicsInCSharp\GraphicsInCSharp\obj\Debug\GraphicsInCSharp.csproj.GenerateResource.Cache
+C:\Users\Ariyan\Desktop\GraphicsInCSharp\GraphicsInCSharp\obj\Debug\GraphicsInCSharp.exe
+C:\Users\Ariyan\Desktop\GraphicsInCSharp\GraphicsInCSharp\obj\Debug\GraphicsInCSharp.pdb

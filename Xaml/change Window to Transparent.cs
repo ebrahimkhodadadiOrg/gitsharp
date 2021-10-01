@@ -1,0 +1,1 @@
+ WindowStyle="None" WindowStartupLocation="CenterScreen" Background="Transparent" AllowsTransparency="True" 
