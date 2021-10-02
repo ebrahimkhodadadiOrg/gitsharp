@@ -1,0 +1,9 @@
+C:\Users\Ariyan\Desktop\DragAndDropThirdTest\DragAndDropThirdTest\bin\Debug\DragAndDropThirdTest.exe.config
+C:\Users\Ariyan\Desktop\DragAndDropThirdTest\DragAndDropThirdTest\bin\Debug\DragAndDropThirdTest.exe
+C:\Users\Ariyan\Desktop\DragAndDropThirdTest\DragAndDropThirdTest\bin\Debug\DragAndDropThirdTest.pdb
+C:\Users\Ariyan\Desktop\DragAndDropThirdTest\DragAndDropThirdTest\obj\Debug\DragAndDropThirdTest.csprojResolveAssemblyReference.cache
+C:\Users\Ariyan\Desktop\DragAndDropThirdTest\DragAndDropThirdTest\obj\Debug\DragAndDropThirdTest.Form1.resources
+C:\Users\Ariyan\Desktop\DragAndDropThirdTest\DragAndDropThirdTest\obj\Debug\DragAndDropThirdTest.Properties.Resources.resources
+C:\Users\Ariyan\Desktop\DragAndDropThirdTest\DragAndDropThirdTest\obj\Debug\DragAndDropThirdTest.csproj.GenerateResource.Cache
+C:\Users\Ariyan\Desktop\DragAndDropThirdTest\DragAndDropThirdTest\obj\Debug\DragAndDropThirdTest.exe
+C:\Users\Ariyan\Desktop\DragAndDropThirdTest\DragAndDropThirdTest\obj\Debug\DragAndDropThirdTest.pdb
