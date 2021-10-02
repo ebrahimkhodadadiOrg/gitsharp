@@ -1,9 +1,0 @@
-C:\Users\Ariyan\Desktop\DragAndDropSecondTest\DragAndDropSecondTest\bin\Debug\DragAndDropSecondTest.exe.config
-C:\Users\Ariyan\Desktop\DragAndDropSecondTest\DragAndDropSecondTest\bin\Debug\DragAndDropSecondTest.exe
-C:\Users\Ariyan\Desktop\DragAndDropSecondTest\DragAndDropSecondTest\bin\Debug\DragAndDropSecondTest.pdb
-C:\Users\Ariyan\Desktop\DragAndDropSecondTest\DragAndDropSecondTest\obj\Debug\DragAndDropSecondTest.csprojResolveAssemblyReference.cache
-C:\Users\Ariyan\Desktop\DragAndDropSecondTest\DragAndDropSecondTest\obj\Debug\DragAndDropSecondTest.Form1.resources
-C:\Users\Ariyan\Desktop\DragAndDropSecondTest\DragAndDropSecondTest\obj\Debug\DragAndDropSecondTest.Properties.Resources.resources
-C:\Users\Ariyan\Desktop\DragAndDropSecondTest\DragAndDropSecondTest\obj\Debug\DragAndDropSecondTest.csproj.GenerateResource.Cache
-C:\Users\Ariyan\Desktop\DragAndDropSecondTest\DragAndDropSecondTest\obj\Debug\DragAndDropSecondTest.exe
-C:\Users\Ariyan\Desktop\DragAndDropSecondTest\DragAndDropSecondTest\obj\Debug\DragAndDropSecondTest.pdb

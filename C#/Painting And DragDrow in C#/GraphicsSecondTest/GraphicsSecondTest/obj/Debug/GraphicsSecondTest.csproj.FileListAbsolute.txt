@@ -1,9 +1,0 @@
-C:\Users\Ariyan\Desktop\GraphicsSecondTest\GraphicsSecondTest\bin\Debug\GraphicsSecondTest.exe.config
-C:\Users\Ariyan\Desktop\GraphicsSecondTest\GraphicsSecondTest\bin\Debug\GraphicsSecondTest.exe
-C:\Users\Ariyan\Desktop\GraphicsSecondTest\GraphicsSecondTest\bin\Debug\GraphicsSecondTest.pdb
-C:\Users\Ariyan\Desktop\GraphicsSecondTest\GraphicsSecondTest\obj\Debug\GraphicsSecondTest.csprojResolveAssemblyReference.cache
-C:\Users\Ariyan\Desktop\GraphicsSecondTest\GraphicsSecondTest\obj\Debug\GraphicsSecondTest.Form1.resources
-C:\Users\Ariyan\Desktop\GraphicsSecondTest\GraphicsSecondTest\obj\Debug\GraphicsSecondTest.Properties.Resources.resources
-C:\Users\Ariyan\Desktop\GraphicsSecondTest\GraphicsSecondTest\obj\Debug\GraphicsSecondTest.csproj.GenerateResource.Cache
-C:\Users\Ariyan\Desktop\GraphicsSecondTest\GraphicsSecondTest\obj\Debug\GraphicsSecondTest.exe
-C:\Users\Ariyan\Desktop\GraphicsSecondTest\GraphicsSecondTest\obj\Debug\GraphicsSecondTest.pdb
