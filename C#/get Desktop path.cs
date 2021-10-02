@@ -1,1 +1,0 @@
-string path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);

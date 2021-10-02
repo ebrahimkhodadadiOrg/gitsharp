@@ -1,8 +1,0 @@
-private void txtCodeMeli_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            string lastChar = txtCodeMeli.Text.Last().ToString();
-            if (!Regex.IsMatch(txtCodeMeli.Text.Last().ToString(), "^[0-9]"))
-            {
-                txtCodeMeli.Text = txtCodeMeli.Text.Replace(lastChar ,"");
-            }
-        }
