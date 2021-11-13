@@ -1,0 +1,34 @@
+
+
+SET NOCOUNT ON;  
+  
+DECLARE @vendor_id INT, @vendor_name NVARCHAR(50),  
+    @message VARCHAR(80), @product NVARCHAR(50);  
+
+DECLARE vendor_cursor CURSOR FOR   
+SELECT GroupID, GroupName
+FROM tblGroup
+ORDER BY GroupID;  
+
+OPEN vendor_cursor  
+FETCH NEXT FROM vendor_cursor   
+INTO @vendor_id, @vendor_name  
+
+WHILE @@FETCH_STATUS = 0 
+BEGIN
+
+INSERT INTO [dbo].[tblPermission]
+           ([GroupID]
+           ,[FormID])
+     VALUES
+           (@vendor_id
+           ,(Select FormID From tblForms where Url = N'ShowCallerIDAlert'))
+
+	FETCH NEXT FROM vendor_cursor   
+    INTO @vendor_id, @vendor_name  
+
+END
+
+CLOSE vendor_cursor;  
+DEALLOCATE vendor_cursor;
+

@@ -1,0 +1,8 @@
+git reset --hard HEAD^
+
+or 
+
+git reset commit
+
+-- insert commit and back to last commit 
+git revert commit

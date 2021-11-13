@@ -1,0 +1,1 @@
+SELECT * FROM tblGroup order by GroupID OFFSET @i ROWS FETCH NEXT 1 ROWS ONLY;
