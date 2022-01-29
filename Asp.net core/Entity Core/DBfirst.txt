@@ -1,0 +1,15 @@
+https://geeksarray.com/blog/entity-framework-core-database-first-tutorial
+
+https://mizfa.com/blog/database-first-asp-net-core/
+
+
+First Time: 
+
+Scaffold-DbContext "Data Source=127.0.0.1;Initial Catalog=Bank;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Entities
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Update FirstCode:
+
+Scaffold-DbContext "Data Source=127.0.0.1;Initial Catalog=Bank; Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;" -Provider Microsoft.EntityFrameworkCore.SqlServer -Tables Person -Force
+
+

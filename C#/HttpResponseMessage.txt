@@ -1,0 +1,10 @@
+		//true
+                return new HttpResponseMessage()
+                {
+                    Content = new StringContent(JValue.FromObject(IsStatus).ToString(), Encoding.UTF8, "application/json")
+                };
+		//false
+	        return new HttpResponseMessage()
+                {
+                    Content = new StringContent(JValue.FromObject(false).ToString(), Encoding.UTF8, "application/json")
+                };

@@ -1,0 +1,4 @@
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, nameOfDataBase dataContext)
+        {
+            dataContext.Database.Migrate();
+        }

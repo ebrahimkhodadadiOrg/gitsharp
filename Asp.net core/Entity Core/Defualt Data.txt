@@ -1,0 +1,8 @@
+    modelBuilder.Entity<Author>().HasData(
+        new Author
+        {
+            AuthorId = 1,
+            FirstName = "William",
+            LastName = "Shakespeare"
+        }
+    );

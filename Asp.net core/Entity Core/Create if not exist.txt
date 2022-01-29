@@ -1,0 +1,4 @@
+public SchoolDBContext(): base("SchoolDBConnectionString") 
+    {
+        Database.SetInitializer<SchoolDBContext>(new CreateDatabaseIfNotExists<SchoolDBContext>());
+    }

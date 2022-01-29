@@ -1,0 +1,8 @@
+ var client = new WebClient();
+                client.Headers[HttpRequestHeader.ContentType] = "application/json";
+                client.Encoding = Encoding.UTF8;
+                var responsePersonal = client.DownloadString(clsGlobal.Configurations.WebSiteAddress + "/apis/apiPersonal/SelectPersonal/" + clsGlobal.xSerial);
+                clsGlobal.ChangeLoadingMessage("لطفا منتظر بمانید");
+                var serializer = new JavaScriptSerializer();
+
+                var resultDataPersonal = serializer.Deserialize<List<MPersonal>>(responsePersonal).ToList();
