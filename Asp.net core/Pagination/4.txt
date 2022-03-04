@@ -1,0 +1,8 @@
+            #region Pager
+            services.AddPaging(options =>
+            {
+                options.ViewName = "ProductPager";
+                options.HtmlIndicatorDown = " <span>&darr;</span>";
+                options.HtmlIndicatorUp = " <span>&uarr;</span>";
+            });
+            #endregion

@@ -1,0 +1,43 @@
+@if(User.Identity.IsAuthenticated)
+{}
+
+
+------------------------------------------------------------------------------------------
+  private readonly UserManager<ApplicationUser> _userManager;
+public YourControllerNameController(UserManager<ApplicationUser> userManager)
+    {
+        _userManager = userManager;
+    }
+
+    public async Task<IActionResult> YourMethodName()
+    {
+        var userId =  User.FindFirstValue(ClaimTypes.NameIdentifier) // will give the user's userId
+        var userName =  User.FindFirstValue(ClaimTypes.Name) // will give the user's userName
+        
+        // For ASP.NET Core <= 3.1
+        ApplicationUser applicationUser = await _userManager.GetUserAsync(User);
+        string userEmail = applicationUser?.Email; // will give the user's Email
+
+       // For ASP.NET Core >= 5.0
+       var userEmail =  User.FindFirstValue(ClaimTypes.Email) // will give the user's Email
+    }
+
+------------------------------------------------------------------------------------------
+
+var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+------------------------------------------------------------------------------------------
+        public async Task<IActionResult> Index()
+        {
+            ClaimsPrincipal currentUser = this.User;
+            var currentUserName = currentUser.FindAll(ClaimTypes.NameIdentifier).ToList();
+            var first = currentUser.FindFirst(ClaimTypes.NameIdentifier).Value;
+            var firsts = currentUser.FindAll(ClaimTypes.Role).ToList();
+            var firstss = currentUser.FindFirst(ClaimTypes.Role).Value;
+            var test_1 = currentUser.IsInRole("ADMIN");
+            var test_2 = currentUser.IsInRole("Basic");
+            if (currentUser.IsInRole("ADMIN"))
+                return Redirect("Admin");
+
+            return View("Basic");
+        }

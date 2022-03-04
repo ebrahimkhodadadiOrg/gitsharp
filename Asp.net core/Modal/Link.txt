@@ -1,0 +1,1 @@
+https://social.msdn.microsoft.com/Forums/en-US/702076b1-a1e5-4b13-a2b3-01b25b1696e5/showing-modal-pop-up-in-aspnet-mvc-as-partial-view?forum=aspmvc

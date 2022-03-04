@@ -1,0 +1,3 @@
+$("#agree").click(function () {
+    $("#btnRegister").attr("disabled", !this.checked);
+});

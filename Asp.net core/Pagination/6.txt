@@ -1,0 +1,6 @@
+			@model IEnumerable<string>
+			@using ReflectionIT.Mvc.Paging
+
+			<nav class="d-inline-block">
+                            @await this.Component.InvokeAsync("Pager", new { PagingList = this.Model })
+                        </nav>

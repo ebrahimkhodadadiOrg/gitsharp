@@ -1,0 +1,6 @@
+	public async Task<IActionResult> Products(int PageNumber = 2, int PageSize = 2)
+        {
+            IEnumerable<string> test = new List<string>() { "s", "t","a","t", "s", "t", "a", "t" };
+            var model = PagingList.Create<string>(test, PageSize, PageNumber);
+            return View(model);
+        }

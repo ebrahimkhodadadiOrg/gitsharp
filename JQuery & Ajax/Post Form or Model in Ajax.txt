@@ -1,0 +1,23 @@
+ // check Product Model State is valid
+    $("#ProductForm").submit(function (event) {
+        event.preventDefault();
+        ShowLoader();
+
+        $.ajax({
+            url: "/Admin/Panel/EditeProductAPI",
+            type: "POST",
+            contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+            datatype: JSON,
+            data: $('form').serialize(),
+            success: function (data) {
+                swal('سرویس با موفقیت ویرایش شد', {
+                    icon: 'success',
+                });
+            },
+            error: function (data) {
+                HideLoader();
+                swal('خطا در ثبت درخواست', data.responseJSON.value.message, 'error');
+            },
+            complete: function (data) { HideLoader(); }
+        });
+    });

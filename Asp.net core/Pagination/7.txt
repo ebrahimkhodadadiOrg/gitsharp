@@ -1,0 +1,28 @@
+public async Task<PagedResponse<IEnumerable<GetAllProductsViewModel>>> GetAllProductsPagedReponseAsync(int pageNumber, int pageSize)
+        {
+            //Count
+            var pageCount = await _dbContext.tblProduct.CountAsync();
+
+            //List
+            var listProducts = await _dbContext
+            .tblProduct
+            .Skip((pageNumber - 1) * pageSize)
+            .Take(pageSize)
+            .AsNoTracking()
+            .Include(product => product.tblProvider)
+            .ToListAsync();
+
+            //Map
+            var productViewModel = listProducts.Select(product => new GetAllProductsViewModel()
+            {
+                Id = product.Id,
+                Name = product.Name,
+                Provider = product.tblProvider.Url,
+                ProviderPrice = _IConvert.RoundNumber(product.Price),
+                ProviderProductID = product.ProviderProductID
+            });
+
+            //return
+            model.Action = "DeletedProducts";
+            return new PagedResponse<IEnumerable<GetAllProductsViewModel>>(productViewModel, pageNumber, pageSize, pageCount);
+        }

@@ -1,0 +1,10 @@
+protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<Customer>().HasQueryFilter(c => !c.IsDeleted);
+    }
+------------------------------------------------------------------------------ignore
+using (var context = new MyContext())
+{
+    var customers = context.Customers
+        .IgnoreQueryFilters().ToList();
+}

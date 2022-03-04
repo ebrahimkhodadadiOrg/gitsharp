@@ -1,4 +1,38 @@
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, nameOfDataBase dataContext)
+        public void Configure(nameOfDataBase dataContext)
         {
             dataContext.Database.Migrate();
         }
+
+
+
+----------------------------------------------------------------------------------------
+            public static class MigrateDbContextClass
+    {
+        public static IHost MigrateApplicationDbContext(this IHost host)
+        {
+            using (var scope = host.Services.CreateScope())
+            {
+                var services = scope.ServiceProvider;
+                var loggerFactory = services.GetRequiredService<ILoggerFactory>();
+
+                using (var appContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>())
+                {
+                    try
+                    {
+                        appContext.Database.Migrate();
+                    }
+                    catch (Exception ex)
+                    {
+                        Log.Warning(ex, "An error occurred Migration the ApplicationDbContext");
+                    }
+                    finally
+                    {
+                        Log.CloseAndFlush();
+                    }
+                }
+            }
+            return host;
+        }
+    }
+
+            var host = CreateHostBuilder(args).Build().MigrateIdentityDbContext().MigrateApplicationDbContext();

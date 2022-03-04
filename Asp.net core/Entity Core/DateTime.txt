@@ -1,0 +1,14 @@
+protected override void OnModelCreating(ModelBuilder builder)
+        {
+            #region DateTime
+            foreach (var entity in builder.Model.GetEntityTypes())
+            {
+                var dateTimeProps = entity.GetProperties()
+                    .Where(p => p.PropertyInfo.PropertyType == typeof(DateTime));
+                foreach (var prop in dateTimeProps)
+                {
+                    modelBuilder.Entity(entity.Name).Property(prop.Name).HasColumnType("datetime2");
+                }
+
+            }
+            #endregion

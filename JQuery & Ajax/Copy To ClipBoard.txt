@@ -1,0 +1,7 @@
+function copyToClipboard(element) {
+    $(element).select();
+    document.execCommand("copy");
+}
+------------------------------------------------------------
+
+onclick="copyToClipboard('#txtToken')"

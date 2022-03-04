@@ -1,0 +1,1 @@
+https://codeburst.io/implement-recaptcha-in-asp-net-core-and-razor-pages-eed8ae720933

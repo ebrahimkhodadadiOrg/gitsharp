@@ -1,0 +1,38 @@
+                <div class="form-group mb-3">
+                    <label asp-for="ProductKind"></label>
+                    <div class="form-group">
+                        <div class="mb-2">
+                            <select id="KindParent" class="form-control selectric" asp-items="Model.tblProductKindParent"></select>
+                        </div>
+                        <div>
+                            <select id="KindChild" class="form-control @*selectric*@" asp-for="ProductKind"></select>
+                        </div>
+                    </div>
+                </div>
+---------------------------------------------------------------------------------------------------------
+<script>
+
+    function LoadKindChild() {
+        var selectedKindParent = $("#KindParent").val();
+        var selectedKindChild = $('#KindChild');
+        var listKindChild = @Html.Raw(Json.Serialize(@Model.tblProductKindChild));
+
+        selectedKindChild.empty();
+
+        $.each(listKindChild, function () {
+            if (this.parent == selectedKindParent) {
+            selectedKindChild.append($("<option></option>").val(this.value).html(this.text));
+            }
+        });
+    }
+
+    $('#KindParent').on('change', LoadKindChild);
+
+</script>
+----------------------------------------------------------------------------------------------------------
+
+         success: function (data) {
+                    $("#ProductDetailModal .modal-content").html(data);
+                    $("#ProductDetailModal").modal("show");
+                    LoadKindChild();  <--
+                },

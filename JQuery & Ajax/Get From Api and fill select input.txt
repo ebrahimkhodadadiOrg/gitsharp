@@ -1,0 +1,18 @@
+$(document).ready(function () {
+    $.ajax({
+        url: "https://localhost:9031/v1/ProfileApi/GetListCountries",
+        type: "GET",
+        contentType: "application/json; charset=utf-8",
+        datatype: JSON,
+        success: function (result) {
+            $(result).each(function () {
+
+--just remove this line if you dont have another column for data that seprated
+                $(this.data).each(function () {
+                    $("#CountryID").append($("<option></option>").val(this.id).html(this.name));
+                });
+            });
+        },
+        error: function (data) { $("#CountryID").append($("<option></option>").val(106).html("Iran, Islamic Republic of")); }
+    });
+});

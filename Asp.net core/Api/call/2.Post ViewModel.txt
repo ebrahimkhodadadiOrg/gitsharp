@@ -1,0 +1,28 @@
+public async Task<IActionResult> Products(int PageIndex = 1)
+        {
+            //Authorize
+            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", User.FindFirst("AccessToken")?.Value);
+            //Serialize
+            var content = new StringContent(JsonConvert.SerializeObject(new RequestParameterModel()
+            {
+                PageNumber = PageIndex,
+                PageSize = 10
+            }), Encoding.UTF8, "application/json");
+            //Send Request
+            using var response = await _httpClient.PostAsync(_WebSiteSettings.API + "/Product/GetAllProductsByPage", content);
+
+            //if succced
+            if (!response.IsSuccessStatusCode)
+            {
+                return View(null);
+            }
+
+            //Deserialize
+            var result = await response.Content.ReadAsStringAsync();
+            //Cast
+            var products = JsonConvert.DeserializeObject<ApiResponse<IEnumerable<ListProductsViewModel>>>(result);
+            //Pagination
+            var model = PagingList.Create<ListProductsViewModel>(products.Data.ToList(), 2, PageIndex);
+            //return
+            return View(model);
+        }

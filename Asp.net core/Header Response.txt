@@ -1,0 +1,5 @@
+            app.Use(async (context, next) =>
+             {
+                 context.Response.Headers.Add("X-Site", _config.GetValue<string>("UI"));
+                 await next();
+             });

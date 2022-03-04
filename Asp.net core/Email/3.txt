@@ -1,7 +1,7 @@
       "MailSettings": {
-    "Mail": "ebrahimiprivacysendemail@gmail.com",
-    "DisplayName": "ebrahimiprivacysendemail@gmail.com",
-    "Password": "14001400",
+    "Mail": "privacysendemail@gmail.com",
+    "DisplayName": "privacysendemail@gmail.com",
+    "Password": "1400",
     "Host": "smtp.gmail.com",
     "Port": 587
   },
