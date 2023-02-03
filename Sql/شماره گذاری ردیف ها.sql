@@ -1,1 +1,0 @@
-ROW_NUMBER() OVER(ORDER BY xId) AS Row

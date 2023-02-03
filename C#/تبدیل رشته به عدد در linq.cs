@@ -1,1 +1,0 @@
-﻿SqlFunctions.StringConvert((double)a.Variable)

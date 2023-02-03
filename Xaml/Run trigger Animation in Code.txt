@@ -1,2 +1,0 @@
-                Storyboard myStoryboard1 = (Storyboard)(TryFindResource("windowConfigure_back"));
-                myStoryboard1.Begin();

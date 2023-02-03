@@ -1,1 +1,0 @@
-WindowState = WindowState.Minimized;

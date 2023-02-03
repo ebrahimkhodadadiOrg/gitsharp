@@ -1,0 +1,49 @@
+  "MailSettings": {
+    "Mail": "ebrahimiprivacysendemail@gmail.com",
+    "DisplayName": "ebrahimiprivacysendemail@gmail.com",
+    "Password": "14001400",
+    "Host": "smtp.gmail.com",
+    "Port": 587
+  },
+
+---------------------------------------------------------------------------------------------
+public IConfiguration _config { get; }
+        public Startup(IConfiguration configuration)
+        {
+            _config = configuration;
+        }
+            services.Configure<MailSettings>(Configuration.GetSection("MailSettings"));
+
+Configuration.GetValue<string>("API")
+
+---------------------------------------------------------------------------------------------
+        private readonly MailSettings _mailSettings;
+        public MailService(IOptions<MailSettings> mailSettings)
+        {
+            _mailSettings = mailSettings.Value;
+        }
+
+---------------------------------------------------------------------------------------------
+
+            var appSettings = context.RequestServices.GetRequiredService<IConfiguration>();
+
+            var apiKey = appSettings.GetValue<string>(APIKEYNAME);
+
+---------------------------------------------------------------------------------------------
+            services.Configure<MailSettings>(_config.GetSection("MailSettings"));
+		Configuration.GetSection("website").GetValue<string>("API")
+
+******************************************************************************************************
+- Get and use it in javascript File -
+
+"ApiUrls": {
+    "commonUrl": "https://localhost:44348/api/"    
+  }
+
+@using Microsoft.Extensions.Configuration
+@inject IConfiguration Configuration
+
+<script>      
+        const commonUrl = @Json.Serialize(@Configuration.GetSection("ApiUrls").GetSection("commonUrl").Value)
+</script>
+

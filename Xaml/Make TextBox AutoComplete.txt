@@ -1,8 +1,0 @@
-https://github.com/quicoli/WPF-AutoComplete-TextBox
-
-
-     AutoCompleteStringCollection stringCollection = new AutoCompleteStringCollection(){"String 1", "String 2", "etc..."};
-   
-     textbox1.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-     textbox1.AutoCompleteSource = AutoCompleteSource.CustomSource;
-     textbox1.AutoCompleteCustomSource = stringCollection;
