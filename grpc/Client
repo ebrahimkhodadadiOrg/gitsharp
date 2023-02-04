@@ -1,0 +1,16 @@
+    
+    public QrManagementServiceClient _client = null;
+    private GrpcChannel _channel;
+
+    protected QrManagementServiceClient Client
+    {
+        get
+        {
+            if (_client == null)
+            {
+                _channel = GrpcChannel.ForAddress(_grpcSettings.ServiceUrl);
+                _client = new QrManagementServiceClient(_channel);
+            }
+            return _client;
+        }
+    }
