@@ -1,0 +1,41 @@
+version: "3.3"
+services:
+  mongodb:
+    hostname: mongodb
+    container_name: mongodb
+    image: mongo
+    expose:
+      - 27017
+    ports:
+      - 27017:27017
+    volumes:
+      - mongodb_repl_data1:/data/db:z
+    restart: always
+  redis:
+    hostname: redis
+    container_name: redis
+    image: redislabs/redismod
+    expose:
+      - 6379
+    ports:
+      - 6379:6379
+    volumes:
+      - redisdb_repl_data1:/data
+    restart: always
+  elk:
+    hostname: elk
+    container_name: elk
+    image: sebp/elk
+    ports:
+      - "5601:5601"
+      - "9200:9200"
+      - "5044:5044"
+    volumes:
+      - "elasticsearch_repl_data1:/var/lib/elasticsearch"
+volumes:
+  mongodb_repl_data1:
+    external: true
+  redisdb_repl_data1:
+    external: true
+  elasticsearch_repl_data1:
+    external: true
