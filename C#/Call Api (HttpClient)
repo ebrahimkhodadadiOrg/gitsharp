@@ -1,0 +1,114 @@
+namespace Services.API;
+
+public interface IApiService : IScopedDependency
+{
+    /// <summary>
+    /// Send And Recive request then deserilize
+    /// </summary>
+    /// <param name="uri">Uri Address</param>
+    /// <param name="payload">payload</param>
+    /// <param name="header">header</param>
+    /// <param name="method">Http Method</param>
+    /// <param name="serialize">if want to serilize payload</param>
+    /// <returns>deserilized response</returns>
+    Task<T?> SendRequestAsync<T>(string uri, object? payload, string header, string method, bool serialize, CancellationToken cancellationToken);
+
+    /// <summary>
+    /// Send request And return response
+    /// </summary>
+    /// <param name="uri">Uri Address</param>
+    /// <param name="payload">payload</param>
+    /// <param name="header">header</param>
+    /// <param name="method">Http Method</param>
+    /// <param name="serialize">if want to serilize payload</param>
+    /// <returns>http response</returns>
+    Task<HttpResponseMessage> SendRequestAsync(string uri, object? payload, string header, string method, bool serialize, CancellationToken cancellationToken);
+}
+
+public class ApiService : IApiService
+{
+    public async Task<T?> SendRequestAsync<T>(string uri, object? payload, string header, string method, bool serialize, CancellationToken cancellationToken)
+    {
+        string payloadSerialized = string.Empty;
+        if (serialize && payload is not null)
+            payloadSerialized = JsonConvert.SerializeObject(payload);
+        else if (payload is not null)
+            payloadSerialized = payload.ToString();
+
+        //Send Request
+        using (var httpclient = new HttpClient())
+        using (var request = new HttpRequestMessage(new HttpMethod(method), uri))
+        {
+            // set query
+            using (var stringContent = new StringContent(payloadSerialized, Encoding.UTF8, "application/json"))
+            {
+                if (!string.IsNullOrWhiteSpace(payloadSerialized))
+                    request.Content = stringContent;
+                else
+                    request.Content = null;
+
+                // Set Header
+                if (header != null)
+                    httpclient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(header);
+
+                var startDate = DateTime.Now;
+
+                // Send Request
+                using (var response = await httpclient
+                    .SendAsync(request, HttpCompletionOption.ResponseHeadersRead, cancellationToken))
+                {
+                    var endDate = DateTime.Now;
+
+                    // Load Buffer Request
+                    //await response.Content.LoadIntoBufferAsync().ConfigureAwait(false);
+
+                    // Deserilize Object NewtonSoft
+                    var result = await response.Content.ReadAsStringAsync();
+                    return JsonConvert.DeserializeObject<T>(result);
+                }
+            }
+        }
+    }
+
+    public async Task<HttpResponseMessage> SendRequestAsync(string uri, object payload, string header, string method, bool serialize, CancellationToken cancellationToken)
+    {
+        string payloadSerialized = string.Empty;
+        if (serialize && payload is not null)
+            payloadSerialized = JsonConvert.SerializeObject(payload);
+        else if (payload is not null)
+            payloadSerialized = payload.ToString();
+
+        //Send Request
+        using (var httpclient = new HttpClient())
+        using (var request = new HttpRequestMessage(new HttpMethod(method), uri))
+        {
+            // set query
+            using (var stringContent = new StringContent(payloadSerialized, Encoding.UTF8, "application/json"))
+            {
+                if (!string.IsNullOrWhiteSpace(payloadSerialized))
+                    request.Content = stringContent;
+                else
+                    request.Content = null;
+
+                // Set Header
+                if (header != null)
+                    httpclient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", header);
+                //httpclient.DefaultRequestHeaders.Add();
+
+                var startDate = DateTime.Now;
+
+                // Send Request
+                using (var response = await httpclient
+                    .SendAsync(request, HttpCompletionOption.ResponseHeadersRead, cancellationToken))
+                {
+                    var endDate = DateTime.Now;
+
+                    // Load Buffer Request
+                    await response.Content.LoadIntoBufferAsync().ConfigureAwait(false);
+
+                    return response;
+                }
+            }
+        }
+    }
+}
