@@ -54,7 +54,6 @@ public class SignalRHub : Hub<IClient>
 
     /// <summary>
     /// 1- save connection in cache
-    /// 2- if any playlist saved send it to client
     /// </summary>
     /// <param name="model">controller detail</param>
     /// <returns></returns>

@@ -1,9 +1,0 @@
-C:\Users\Ariyan\Desktop\DragAndDrop\DragAndDrop\bin\Debug\DragAndDrop.exe.config
-C:\Users\Ariyan\Desktop\DragAndDrop\DragAndDrop\bin\Debug\DragAndDrop.exe
-C:\Users\Ariyan\Desktop\DragAndDrop\DragAndDrop\bin\Debug\DragAndDrop.pdb
-C:\Users\Ariyan\Desktop\DragAndDrop\DragAndDrop\obj\Debug\DragAndDrop.csprojResolveAssemblyReference.cache
-C:\Users\Ariyan\Desktop\DragAndDrop\DragAndDrop\obj\Debug\DragAndDrop.Form1.resources
-C:\Users\Ariyan\Desktop\DragAndDrop\DragAndDrop\obj\Debug\DragAndDrop.Properties.Resources.resources
-C:\Users\Ariyan\Desktop\DragAndDrop\DragAndDrop\obj\Debug\DragAndDrop.csproj.GenerateResource.Cache
-C:\Users\Ariyan\Desktop\DragAndDrop\DragAndDrop\obj\Debug\DragAndDrop.exe
-C:\Users\Ariyan\Desktop\DragAndDrop\DragAndDrop\obj\Debug\DragAndDrop.pdb
