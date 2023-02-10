@@ -32,10 +32,62 @@ services:
       - "5044:5044"
     volumes:
       - "elasticsearch_repl_data1:/var/lib/elasticsearch"
+  sql:
+    hostname: sql
+    container_name: sql
+    image: 'mcr.microsoft.com/mssql/server'
+    user: root
+    ports:
+      - '1433:1433'
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=a123Aa123A
+    volumes:
+      - "sql_Data:/var/opt/mssql/data"
+      - "sql_log:/var/opt/mssql/log"
+      - "sql_secrets:/var/opt/mssql/secrets"
+  prometheus:
+    hostname: prometheus
+    container_name: prometheus
+    image: 'prom/prometheus:latest'
+    ports:
+      - "9090:9090"
+    volumes:
+      - /etc/prometheus:/etc/prometheus
+      - prometheus-data:/prometheus
+    restart: unless-stopped
+    command:
+      - "--config.file=/etc/prometheus/prometheus.yml"
+  grafana:
+    hostname: grafana
+    container_name: grafana
+    image: 'grafana/grafana:latest'
+    ports:
+      - "3000:3000"
+    volumes:
+      - grafana-data:/var/lib/grafana
+    restart: unless-stopped
+  backup:
+    hostname: backup
+    container_name: backup
+    image: 'jareware/docker-volume-backup:2.6.0'
+    volumes:
+      - sql_Data:/backup/sql_Data/_data:ro
+      - ./backups:/archive
 volumes:
   mongodb_repl_data1:
     external: true
   redisdb_repl_data1:
     external: true
   elasticsearch_repl_data1:
+    external: true
+  sql_Data:
+    external: true
+  sql_log:
+    external: true
+  sql_secrets:
+    external: true
+  prometheus-data:
+    external: true
+  grafana-data:
     external: true

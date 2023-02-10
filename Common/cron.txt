@@ -1,0 +1,4 @@
+- information
+https://man7.org/linux/man-pages/man8/cron.8.html
+- test
+https://crontab.guru/#*_*_*_*_*
