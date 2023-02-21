@@ -67,6 +67,18 @@ services:
     volumes:
       - grafana-data:/var/lib/grafana
     restart: unless-stopped
+  rabbitmq:
+    hostname: rabbitmq
+    container_name: rabbitmq
+    image: bitnami/rabbitmq
+    restart: always
+    environment:
+     RABBITMQ_DEFAULT_USER: rabbit
+     RABBITMQ_DEFAULT_PASS: rabbit
+    ports:
+      - '15672:15672'
+    volumes:
+      - 'rabbitmq_data:/bitnami'
   backup:
     hostname: backup
     container_name: backup
@@ -90,4 +102,6 @@ volumes:
   prometheus-data:
     external: true
   grafana-data:
+    external: true
+  rabbitmq_data:
     external: true

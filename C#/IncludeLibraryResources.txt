@@ -1,0 +1,10 @@
+https://www.mikesdotnetting.com/article/330/including-static-resources-in-razor-class-libraries-in-asp-net-core
+
+- tip:
+1- remember to add this lines to csproj
+		<GenerateEmbeddedFilesManifest>true</GenerateEmbeddedFilesManifest>
+        <PackageReference Include="Microsoft.Extensions.FileProviders.Embedded" Version="6.0.14" />
+        	<ItemGroup>
+		        <EmbeddedResource Include="resources\**\*" />
+	        </ItemGroup>
+2- change name of folders the main project will override folders and files
