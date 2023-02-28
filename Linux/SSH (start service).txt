@@ -1,0 +1,8 @@
+# https://jmmv.dev/2022/02/wsl-ssh-access.html
+
+
+$ sudo apt install openssh-server
+$ sudo sed -i -E 's,^#?Port.*$,Port 22,' /etc/ssh/sshd_config
+$ sudo service ssh restart
+$ sudo sh -c "echo '${USER} ALL=(root) NOPASSWD: /usr/sbin/service ssh start' >/etc/sudoers.d/service-ssh-start"
+$ sudo /usr/sbin/service ssh start

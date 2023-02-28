@@ -1,0 +1,36 @@
+using Microsoft.OpenApi.Any;
+using Microsoft.OpenApi.Models;
+using Swashbuckle.AspNetCore.SwaggerGen;
+
+namespace CAP.VMS.Api.Framework;
+
+public class EnumSchemaFilter : ISchemaFilter
+{
+    public void Apply(OpenApiSchema schema, SchemaFilterContext context)
+    {
+        if (context.Type.IsEnum)
+        {
+            schema.Enum.Clear();
+            // Get Just Name
+            //Enum.GetNames(context.Type)
+            //    .ToList()
+            //    .ForEach(name => schema.Enum.Add(new OpenApiString($"{name}")));   
+            // Get Name And Value
+            Enum.GetValues(context.Type)
+                .Cast<Enum>()
+                .ToDictionary(t => (int)(object)t, t => t.ToString())
+                .ToList()
+                .ForEach(name => schema.Enum.Add(new OpenApiString($"{name}")));
+        }
+    }
+}
+-------------------------------------------------------------------------------------
+    builder.Services.AddControllers().AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+    });
+    
+    builder.Services.AddSwaggerGen(c =>
+    {
+        c.SchemaFilter<EnumSchemaFilter>();
+    });
