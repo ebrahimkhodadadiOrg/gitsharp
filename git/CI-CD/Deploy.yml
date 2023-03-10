@@ -1,0 +1,21 @@
+name: Deploy Develop
+
+on: 
+ push:
+    branches:
+      - develop
+
+jobs:
+  build:
+
+    runs-on: [self-hosted, linux]
+    
+    steps:
+    - uses: actions/checkout@v3
+    - name: publish docker image
+      run:  docker build -t Api:latest .
+    - name: remove if exist
+      run: docker rm -f Api
+    - name: deploy
+      run: docker run -d -p 80:80 --restart=always --name ApiContainer Api
+    
