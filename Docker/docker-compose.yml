@@ -83,9 +83,27 @@ services:
     hostname: backup
     container_name: backup
     image: 'jareware/docker-volume-backup:2.6.0'
+    environment:
+      SCP_HOST: 192.168.1.2
+      SCP_USER: root
+      SCP_DIRECTORY: /path/to/backups
     volumes:
       - sql_Data:/backup/sql_Data/_data:ro
       - ./backups:/archive
+  cloudbeaver:
+    image: dbeaver/cloudbeaver:${APP_VERSION}
+    container_name: "${APP_NAME}"
+    restart: always
+    ports:
+      - '$APP_HTTP_PORT:8978'
+    volumes: 
+      - cloudbeaver:/opt/cloudbeaver/workspace   
+  redisinsight:
+    image: redislabs/redisinsight:latest
+    ports:
+      - '8001:8001'
+    volumes:
+      - ./Users/ajeetraina/data/redisinsight:/db 
 volumes:
   mongodb_repl_data1:
     external: true
@@ -104,4 +122,6 @@ volumes:
   grafana-data:
     external: true
   rabbitmq_data:
+    external: true
+  cloudbeaver:
     external: true
