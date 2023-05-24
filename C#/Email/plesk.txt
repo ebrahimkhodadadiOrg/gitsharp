@@ -1,9 +1,0 @@
-  "EmailSenderOptions": {
-    "SmtpUser": {
-      "Email": "noreply@sepehrcc.com"
-    },
-    "SmtpPassword": "7U6?Qoa",
-    "SmtpHost": "mail.sepehrcc.com",
-    "SmtpPort": 25,
-    "SmtpSsl": false
-  },
