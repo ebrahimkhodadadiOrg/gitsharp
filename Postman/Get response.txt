@@ -1,0 +1,11 @@
+pm.test("Status code is 200", function () {
+    pm.response.to.have.status(200);
+});
+
+const response = pm.response.json();
+
+pm.test("Status should be OK", () => {
+    pm.expect(response.data).to.be.ok;
+});
+
+pm.globals.set("deliveryTypeId", response.data[1].id);

@@ -1,0 +1,25 @@
+            services.AddTransient<MemoryCacheService>();
+            services.AddTransient<RedisCacheService>();
+            services.AddTransient<Func<CacheTech, ICacheService>>(serviceProvider => key =>
+            {
+                switch (key)
+                {
+                    case CacheTech.Memory:
+                        return serviceProvider.GetService<MemoryCacheService>();
+                    case CacheTech.Redis:
+                        return serviceProvider.GetService<RedisCacheService>();
+                    default:
+                        return serviceProvider.GetService<MemoryCacheService>();
+                }
+            });        
+        
+        
+        
+        
+        private readonly static CacheTech cacheTech = CacheTech.Memory;
+        private readonly Func<CacheTech, ICacheService> _cacheService;
+
+        public GenericRepository(Func<CacheTech, ICacheService> cacheService)
+        {
+            _cacheService = cacheService;
+        }

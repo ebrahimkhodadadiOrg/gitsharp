@@ -1,8 +1,9 @@
-  "MailSettings": {
-    "EmailFrom": "infoEmail@pocopanel.ir",
-    "SmtpHost": "mail.pocopanel.ir",
-    "SmtpPort": 587,
-    "SmtpUser": "infoEmail@pocopanel.ir",
-    "SmtpPass": "14001400",
-    "DisplayName": "mail@pocopanel.ir"
+  "EmailSenderOptions": {
+    "SmtpUser": {
+      "Email": "noreply@sepehrcc.com"
+    },
+    "SmtpPassword": "7U6?Qoa",
+    "SmtpHost": "mail.sepehrcc.com",
+    "SmtpPort": 25,
+    "SmtpSsl": false
   },
