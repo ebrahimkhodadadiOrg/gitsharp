@@ -1,0 +1,8 @@
+  "JwtSettings": {
+    "SecretKey": "LongerThan-16Char",
+    "EncryptKey": "16CharEncrypt",
+    "Issuer": "googlecom",
+    "Audience": "googlecom",
+    "NotBeforeMinutes": "0",
+    "ExpirationMinutes": "43800"
+  },

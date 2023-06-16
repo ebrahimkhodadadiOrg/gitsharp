@@ -1,0 +1,88 @@
+            app.UseEfCoreSeedData();
+--------------------------------------------------------------------------------------------------------------------
+        public static void UseEfCoreSeedData(this IApplicationBuilder app)
+        {
+            using (var scope = app.ApplicationServices.CreateScope())
+            {
+                var identityDbSeedData = scope.ServiceProvider.GetRequiredService<IIdentityDbInitializer>();
+
+                var result = identityDbSeedData.SeedDatabaseWithAdminUserAsync().GetAwaiter().GetResult();
+                if (result == IdentityResult.Failed())
+                {
+                    throw new InvalidOperationException(result.DumpErrors());
+                }
+            }
+        }
+
+
+--------------------------------------------------------------------------------------------------------------------
+    public async Task<IdentityResult> SeedDatabaseWithAdminUserAsync()
+    {
+        var adminUserSeed = _adminUserSeedOptions.Value.AdminUserSeed;
+        ArgumentNullException.ThrowIfNull(adminUserSeed);
+
+        var name = adminUserSeed.Username;
+        var password = adminUserSeed.Password;
+        var email = adminUserSeed.Email;
+        var roleName = adminUserSeed.RoleName;
+
+        var thisMethodName = nameof(SeedDatabaseWithAdminUserAsync);
+
+        var adminUser = await _applicationUserManager.FindByNameAsync(name);
+        if (adminUser != null)
+        {
+            _logger.LogInformation($"{thisMethodName}: adminUser already exists.");
+            return IdentityResult.Success;
+        }
+
+        //Create the `Admin` Role if it does not exist
+        var adminRole = await _roleManager.FindByNameAsync(roleName);
+        if (adminRole == null)
+        {
+            adminRole = new Role(roleName);
+            var adminRoleResult = await _roleManager.CreateAsync(adminRole);
+            if (adminRoleResult == IdentityResult.Failed())
+            {
+                _logger.LogError(
+                    $"{thisMethodName}: adminRole CreateAsync failed. {adminRoleResult.DumpErrors()}");
+                return IdentityResult.Failed();
+            }
+        }
+        else
+        {
+            _logger.LogInformation($"{thisMethodName}: adminRole already exists.");
+        }
+
+        adminUser = new User
+        {
+            UserName = name,
+            Email = email,
+            EmailConfirmed = true,
+            IsEmailPublic = true,
+            LockoutEnabled = true
+        };
+        var adminUserResult = await _applicationUserManager.CreateAsync(adminUser, password);
+        if (adminUserResult == IdentityResult.Failed())
+        {
+            _logger.LogError($"{thisMethodName}: adminUser CreateAsync failed. {adminUserResult.DumpErrors()}");
+            return IdentityResult.Failed();
+        }
+
+        var setLockoutResult = await _applicationUserManager.SetLockoutEnabledAsync(adminUser, false);
+        if (setLockoutResult == IdentityResult.Failed())
+        {
+            _logger.LogError(
+                $"{thisMethodName}: adminUser SetLockoutEnabledAsync failed. {setLockoutResult.DumpErrors()}");
+            return IdentityResult.Failed();
+        }
+
+        var addToRoleResult = await _applicationUserManager.AddToRoleAsync(adminUser, adminRole.Name);
+        if (addToRoleResult == IdentityResult.Failed())
+        {
+            _logger.LogError(
+                $"{thisMethodName}: adminUser AddToRoleAsync failed. {addToRoleResult.DumpErrors()}");
+            return IdentityResult.Failed();
+        }
+
+        return IdentityResult.Success;
+    }
