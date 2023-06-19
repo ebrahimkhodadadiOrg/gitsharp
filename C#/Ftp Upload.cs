@@ -24,19 +24,10 @@ private bool FtpCreateFolder(string ftpAddress)
                 return false;
             }
 
-public void UploadFile(string localFileAddress, string webAddress, string webFileName)
+public void UploadZipFile(string localFileAddress, string webAddress, string webFileName)
         {
             FtpCreateFolder(webAddress);
-            //FtpWebRequest request = (FtpWebRequest)WebRequest.Create(_ftpAddress + webAddress + webFileName);
-            //request.Method = WebRequestMethods.Ftp.UploadFile;
-            //request.Credentials = new NetworkCredential(_ftpUsername, _ftpPassword);
-            //byte[] fileContents = File.ReadAllBytes(localFileAddress);
-            //request.ContentLength = fileContents.Length;
-            //request.KeepAlive = false;
-            //Stream requestStream = request.GetRequestStream();
-            //requestStream.Write(fileContents, 0, fileContents.Length);
-            //requestStream.Close();
-            //webFileName
+
             var request = (FtpWebRequest)WebRequest.Create(_ftpAddress + webAddress + webFileName + ".zip");
             request.Credentials = new NetworkCredential(_ftpUsername, _ftpPassword);
             request.Method = WebRequestMethods.Ftp.UploadFile;
@@ -79,3 +70,34 @@ public void UploadFile(string localFileAddress, string webAddress, string webFil
             fs.Close();
 
             File.Delete(localFileAddress + ".zip");
+        }
+        
+        
+public void UploadFtpFile(string folderName, string fileName)
+{
+
+    FtpWebRequest request;
+
+    string folderName; 
+    string fileName;
+    string absoluteFileName = Path.GetFileName(fileName);
+
+    request = WebRequest.Create(new Uri(string.Format(@"ftp://{0}/{1}/{2}", "127.0.0.1", folderName, absoluteFileName))) as FtpWebRequest;
+    request.Method = WebRequestMethods.Ftp.UploadFile;
+    request.UseBinary = 1;
+    request.UsePassive = 1;
+    request.KeepAlive = 1;
+    request.Credentials =  new NetworkCredential(user, pass);
+    request.ConnectionGroupName = "group"; 
+
+    using (FileStream fs = File.OpenRead(fileName))
+    {
+        byte[] buffer = new byte[fs.Length];
+        fs.Read(buffer, 0, buffer.Length);
+        fs.Close();
+        Stream requestStream = request.GetRequestStream();
+        requestStream.Write(buffer, 0, buffer.Length);
+        requestStream.Flush();
+        requestStream.Close();
+    }
+}

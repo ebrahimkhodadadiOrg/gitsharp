@@ -1,0 +1,163 @@
+public class Program
+{
+    public static async Task Main(string[] args)
+    {
+        try
+        {
+            Log.Information("Starting...");
+            
+            await CreateHostBuilder(args)
+                 .Build()
+                 .RunAsync();
+        }
+        catch (Exception ex)
+        {
+            Log.Fatal(ex, $"Failed to start {Assembly.GetExecutingAssembly().GetName().Name}");
+            throw;
+        }
+        finally
+        {
+            Log.Information("Server Shutting down...");
+            Log.CloseAndFlush();
+        }
+    }
+
+    public static IHostBuilder CreateHostBuilder(string[] args) =>
+        Host.CreateDefaultBuilder(args)
+            .ConfigureWebHostDefaults(builder =>
+            {
+                builder.UseContentRoot(Directory.GetCurrentDirectory());
+                builder.UseSerilog((hostingContext, config) => config
+                .ReadFrom.Configuration(hostingContext.Configuration)
+                .Enrich.WithProperty("ApplicationName", $"WorkerService - {Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT")}")
+                .Enrich.FromLogContext()
+                .Enrich.WithMachineName()
+                .Enrich.WithEnvironmentUserName()
+                .Enrich.WithElasticApmCorrelationInfo()
+                .Filter.ByExcluding(Matching.FromSource("Microsoft.AspNetCore.StaticFiles"))
+                .Filter.ByExcluding(z => z.MessageTemplate.Text.Contains("specific error"))
+                    .WriteTo.Elasticsearch(ConfigureElasticSearchSink())
+                    .WriteTo.Async(writeTo => writeTo.Console(outputTemplate: "[{Timestamp:HH:mm:ss} {Level:u3}] {Message:lj} {Properties:j}{NewLine}{Exception}"))
+                .WriteTo.Debug());
+
+                builder.Configure(app =>
+                {
+                    app.UseRouting();
+                    app.UseEndpoints(endpoints =>
+                    {
+                    });
+                })
+                .ConfigureKestrel(options =>
+                {
+                    options.ListenAnyIP(14103, listenOptions =>
+                    {
+                        listenOptions.Protocols = HttpProtocols.Http2;
+                    });
+                })
+                .UseKestrel()
+                .UseUrls()
+                .UseStartup<GrpcServerStartup>();
+
+            }).UseWindowsService()
+            .ConfigureServices((hostContext, services) =>
+            {
+                var builder = CreateWebApplication(services);
+
+                builder.Logging.ClearProviders();
+                builder.Host.UseSerilog(Log.Logger, true);
+
+                services.AddHostedService<Worker>();
+            })
+            .ConfigureAppConfiguration((hostingContext, config) =>
+            {
+                config
+                    .SetBasePath(hostingContext.HostingEnvironment.ContentRootPath)
+                    .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+                    //.AddJsonFile($"appsettings.{hostingContext.HostingEnvironment.EnvironmentName}.json", optional: true)
+                    .AddEnvironmentVariables();
+            })
+            .ConfigureLogging((builderContext, logging) =>
+            {
+                logging.ClearProviders();
+                logging.AddConsole();
+                logging.AddSerilog();
+            });
+
+    public class GrpcServerStartup
+    {
+        public void ConfigureServices(IServiceCollection services)
+        {
+            services.AddGrpc();
+        }
+
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILogger<Program> logger)
+        {
+            app.UseExceptionHandler(a => a.Run(async context =>
+            {
+                var exceptionHandlerPathFeature = context.Features.Get<IExceptionHandlerPathFeature>();
+                var exception = exceptionHandlerPathFeature.Error;
+                logger.LogError(exception.Message);
+                var result = JsonConvert.SerializeObject(new { error = exception.Message });
+                context.Response.ContentType = "application/json";
+                await context.Response.WriteAsync(result);
+            }));
+
+            app.UseRouting();
+
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapGrpcService<ApiServerGrpc>();
+            });
+        }
+    }
+    private static WebApplicationBuilder CreateWebApplication(IServiceCollection services)
+    {
+        var builder = WebApplication.CreateBuilder();
+        ConfigureConfiguration(builder.Configuration);
+        ConfigureServices(services, builder.Configuration);
+        return builder;
+    }
+
+    private static void ConfigureServices(IServiceCollection services, IConfiguration configuration)
+    {
+        services.AddSingleton<IServiceLocator, ServiceScopeFactoryLocator>();
+
+        // Infrastructure.ContainerSetup
+        services.AddMessageQueues();
+        services.AddMongo(configuration);
+        services.AddCore();
+        services.AddUrlCheckingServices();
+        services.AddGrpc();
+
+        var workerSettings = new WorkerSettings();
+        configuration.Bind(nameof(WorkerSettings), workerSettings);
+        services.AddSingleton(workerSettings);
+
+        var entryPointSettings = new EntryPointSettings();
+        configuration.Bind(nameof(EntryPointSettings), entryPointSettings);
+        services.AddSingleton(entryPointSettings);
+
+        services.AddHostedService<Worker>();
+    }
+
+    private static void ConfigureConfiguration(ConfigurationManager configuration)
+    {
+        configuration.AddEnvironmentVariables();
+    }
+
+    private static ElasticsearchSinkOptions ConfigureElasticSearchSink()
+    {
+        var configuration = new ConfigurationBuilder()
+            .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+            .AddJsonFile($"appsettings.{Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT")}.json", optional: true)
+            .Build();
+        var elasticUri = new Uri(configuration["ElasticConfiguration:Uri"]);
+        return new ElasticsearchSinkOptions(elasticUri)
+        {
+            TypeName = null,
+            AutoRegisterTemplate = true,
+            IndexFormat = $"WorkerService-{DateTime.Now:yyyy-MM}",
+            BatchAction = ElasticOpType.Create,
+        };
+    }
+}

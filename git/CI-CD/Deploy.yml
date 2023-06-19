@@ -1,0 +1,22 @@
+name: Deploy Develop
+
+on: 
+ push:
+ pull_request:
+    types: [closed]
+    branches:
+      - develop
+
+jobs:
+  build:
+
+    runs-on: [self-hosted, linux]
+    
+    steps:
+    - uses: actions/checkout@v3
+    - name: build project
+      run: docker-compose build
+    - name: start docker container
+      run: docker-compose up -d
+    - name: remove unused images & containers
+      run: docker system prune -a -f

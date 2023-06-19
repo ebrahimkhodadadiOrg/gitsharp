@@ -1,0 +1,26 @@
+
+using Microsoft.AspNetCore.Http;
+
+namespace Common;
+
+public static class CookieHelper
+{
+    private static CookieOptions GetCookieOptions()
+    {
+        return new CookieOptions
+        {
+            HttpOnly = true,
+            IsEssential = true,
+        };
+    }
+    
+    public static void AddCookie(this HttpResponse response, string key, string value)
+    {
+        response.Cookies.Append(key, value, GetCookieOptions());
+    }
+
+    public static void DeleteCookie(this HttpResponse response, string key)
+    {
+        response.Cookies.Delete(key, GetCookieOptions());
+    }
+}

@@ -1,0 +1,9 @@
+  "EmailSenderOptions": {
+    "SmtpUser": {
+      "Email": "noreply@gmail.com"
+    },
+    "SmtpPassword": "123456",
+    "SmtpHost": "mail.gmail.com",
+    "SmtpPort": 25,
+    "SmtpSsl": false
+  },

@@ -1,8 +1,0 @@
-  "MailSettings": {
-    "EmailFrom": "infoEmail@pocopanel.ir",
-    "SmtpHost": "mail.pocopanel.ir",
-    "SmtpPort": 587,
-    "SmtpUser": "infoEmail@pocopanel.ir",
-    "SmtpPass": "14001400",
-    "DisplayName": "mail@pocopanel.ir"
-  },

@@ -1,0 +1,4 @@
+1- right click on your project layer and click on Add > Container orchestrator support > select DockerCompose
+2- run github runner go to github.com > settings > action > runner
+3- config ci/cd files go to repository > action tab > create
+4- remeber to change this line on docker file "ENTRYPOINT ["dotnet", "Sepehr.Api.dll", "--server.urls", "http://+:80"]"

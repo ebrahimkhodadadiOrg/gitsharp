@@ -1,0 +1,42 @@
+    /// <summary>
+    /// Start scheduler in IHost Builder
+    /// </summary>
+    /// <param name="cancellationToken">Stop Request</param>
+    /// <returns></returns>
+    private async Task InitilizeScheduler(CancellationToken cancellationToken)
+    {
+        scheduleHost = Host.CreateDefaultBuilder()
+             .ConfigureLogging((host, builder) =>
+             {
+                 builder.SetMinimumLevel(LogLevel.None); // don't print any logs
+             })
+            .ConfigureWebHostDefaults(builder =>
+                builder.Configure(app =>
+                {
+                    app.ConfigureHangfireApp();
+                }).UseUrls()
+                )
+            .ConfigureServices(services =>
+                {
+                    services.Configure<ConsoleLifetimeOptions>(options =>  // configure the options
+                    options.SuppressStatusMessages = true);            // in code
+
+                    services.AddHangfireService();
+                    //services.AddHostedService<SchedulerWorker>();
+                });
+
+        using (var host = scheduleHost.Build())
+        {
+            await host.StartAsync();
+            var lifetime = host.Services.GetRequiredService<IHostApplicationLifetime>();
+
+            appsettings.Logger.LogInformation("Scheduler is started.");
+
+            while (!cancellationToken.IsCancellationRequested) { }
+
+            appsettings.Logger.LogWarning("Scheduler is stopped.");
+
+            lifetime.StopApplication();
+            await host.WaitForShutdownAsync();
+        }
+    }

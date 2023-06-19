@@ -1,1 +1,11 @@
 Install-Package Swashbuckle.AspNetCore
+
+
+
+            services.AddControllers()
+                .AddNewtonsoftJson()
+                .AddJsonOptions(options => options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()));
+            services.AddCustomSwagger();
+
+
+            app.UseApiVersioning();

@@ -4,3 +4,10 @@ or
 
 -- insert commit and back to last commit 
 git revert commit
+
+
+--
+
+
+
+git reset --hard <commidId> && git push --force

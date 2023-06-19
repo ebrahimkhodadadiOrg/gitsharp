@@ -1,0 +1,7 @@
+    context.Database.Log = s => System.Diagnostics.Debug.WriteLine(s);
+---------------------------------------------------------------------------
+      services.AddDbContext<IDbContext, ApplicationDbContext>(
+        options => options.UseSqlServer(dbConnectionString)
+                          .LogTo(s => System.Diagnostics.Debug.WriteLine(s))
+                          .EnableDetailedErrors(isDebugMode)
+                          .EnableSensitiveDataLogging(isDebugMode));

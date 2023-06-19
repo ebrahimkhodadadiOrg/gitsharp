@@ -1,0 +1,9 @@
+$ git checkout my-branch-to-rename
+
+$ git branch -m my-new-branch-name
+
+git branch (-m | -M) [<oldbranch>] <newbranch>
+
+$ git push -u origin my-new-branch-name
+
+$ git push origin --delete my-branch-to-rename

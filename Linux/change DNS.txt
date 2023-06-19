@@ -1,0 +1,4 @@
+- change for ever
+sudo nano /etc/resolvconf/resolv.conf.d/head
+- change temporary
+sudo nano /etc/resolve.conf
