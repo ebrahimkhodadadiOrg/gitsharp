@@ -149,5 +149,22 @@ namespace Framework.CommonUtility
         {
             return str?.Length == 0 ? null : str;
         }
+
+        public static T? ConvertTo<T>(this string input, object? defualtValue = null)
+        {
+            try
+            {
+                var converter = TypeDescriptor.GetConverter(typeof(T));
+                if (converter != null)
+                {
+                    return (T)converter.ConvertFromString(input);
+                }
+                return (T?)defualtValue ?? default(T);
+            }
+            catch (NotSupportedException)
+            {
+                return default;
+            }
+        }
     }
 }

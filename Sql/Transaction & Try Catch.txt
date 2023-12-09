@@ -1,11 +1,32 @@
-BEGIN TRANSACTION [Tran1]
-BEGIN TRY
+BEGIN TRANSACTION MigrateUsers
 
 
-COMMIT TRANSACTION [Tran1]
+DECLARE @email NVARCHAR = LTRIM(RTRIM(N''))
 
-END TRY
-BEGIN CATCH
-  ROLLBACK TRANSACTION [Tran1]
-  RETURN N'خطا در ثبت اطلاعات' + ERROR_MESSAGE()
-END CATCH  
+IF (@email IS NULL OR @email = '')
+BEGIN
+RAISERROR('Email cannot be null or empty.', 16, 1)
+ROLLBACK TRANSACTION MigrateUsers
+RETURN
+END
+
+
+IF @@ERROR <> 0
+BEGIN
+  Print(ERROR_MESSAGE())
+  ROLLBACK TRANSACTION MigrateUsers
+  RETURN
+END
+
+COMMIT TRANSACTION MigrateUsers
+
+---------------------------------------------
+
+Information Error Example:
+RAISERROR('This is an informational message.', 0, 1)
+
+Alert Error Example:
+RAISERROR('Alert! There is a problem with the database connection.', 16, 1)
+
+Dangerous Error Example:
+RAISERROR('Critical error occurred. System shutting down.', 18, 1)

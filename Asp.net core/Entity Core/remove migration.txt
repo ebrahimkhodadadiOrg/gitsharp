@@ -1,0 +1,3 @@
+remove-migration name_of_bad_migration
+add-migration my_new_migration
+update-database

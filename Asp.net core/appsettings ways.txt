@@ -46,4 +46,12 @@ Configuration.GetValue<string>("API")
 <script>      
         const commonUrl = @Json.Serialize(@Configuration.GetSection("ApiUrls").GetSection("commonUrl").Value)
 </script>
-
+-----------------------------------------------------------------------
+AppSetting = new ConfigurationBuilder()
+                    .SetBasePath(Directory.GetCurrentDirectory())
+                    .AddJsonFile("YouAppSettingFile.json")
+                    .Build();
+-----------------------------------------------------------------------------------------------------------------
+            var s3ConfigSection = configuration.GetSection(nameof(FileManagerSettings));
+            var s3Config = new FileManagerSettings();
+            s3ConfigSection.Bind(s3Config);

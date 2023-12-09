@@ -7,3 +7,5 @@ $ sudo docker-compose up -d
 $ sudo docker ps -a
 5- if want to stop all containers
 $ sudo docker-compose down -d
+    - name: remove old images
+      run: docker system prune -a -f
