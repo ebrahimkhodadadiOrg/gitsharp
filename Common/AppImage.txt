@@ -1,0 +1,16 @@
+sudo apt-get install fuse
+./desktop-3.3.57.AppImage --appimage-extract
+./AppRun
+
+cd ~/.local/share/applications/
+nano YourAppName.desktop ->
+```
+[Desktop Entry]
+Name=Your App Name
+Exec=/path/to/your/AppRun
+Icon=/path/to/your/icon.png
+Type=Application
+Categories=Utility;
+```
+
+chmod 644 YourAppName.desktop

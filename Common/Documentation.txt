@@ -1,0 +1,12 @@
+top:
+	https://github.com/hoppscotch/hoppscotch
+	https://github.com/facebook/docusaurus
+	https://github.com/stoplightio/elements
+	https://github.com/squidfunk/mkdocs-material
+
+
+https://github.com/slatedocs/slate
+
+C#:
+	https://gist.github.com/VincentH-Net/a950fb18363111ccac8e1fb64123647e
+	https://learn.microsoft.com/en-us/aspnet/core/web-api/microsoft.dotnet-openapi?view=aspnetcore-8.0
